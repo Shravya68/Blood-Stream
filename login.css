@@ -9,7 +9,7 @@
 
 body {
   min-height: 100vh;
-background: linear-gradient(135deg, #ff4d6d, #ff7e5f);
+  background: radial-gradient(135deg, #f7b8c3, #ff7e5f);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,9 @@ background: linear-gradient(135deg, #ff4d6d, #ff7e5f);
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  outline-color: #333;
+  /*outline: 0.7px solid rgb(90, 10, 10);*/
+  box-shadow: 10px 20px 50px rgba(252, 3, 3, 0.2);
   backdrop-filter: blur(12px);
 }
 
@@ -30,6 +32,7 @@ background: linear-gradient(135deg, #ff4d6d, #ff7e5f);
 .left {
   flex: 1;
   color: white;
+  background:#e46379;
   padding: 50px 30px;
   display: flex;
   flex-direction: column;
