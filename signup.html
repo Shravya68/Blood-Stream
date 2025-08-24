@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodStream Signup</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- Left Side -->
+    <div class="left">
+      <h1>Join <span>BloodStream</span></h1>
+      <p>Be a part of a lifesaving network.  
+      Whether you're a patient, donor, or hospital,  
+      your contribution can make a difference.</p>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right">
+      <div class="navbar">
+        <button class="nav-btn active">Patient</button>
+        <button class="nav-btn">Donor</button>
+        <button class="nav-btn">Hospital</button>
+      </div>
+
+      <div class="form-box">
+        <h2 class="title">Create Account</h2>
+
+        <form>
+          <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" required>
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+            <input type="password" placeholder="Create a password" required>
+          </div>
+
+          <div class="input-group">
+            <label>Age</label>
+            <input type="number" placeholder="Enter your age" required>
+          </div>
+
+          <div class="input-group">
+            <label>Contact</label>
+            <input type="tel" placeholder="Enter your contact number" required>
+          </div>
+
+          <button type="submit" class="btn login-btn">Sign Up</button>
+        </form>
+
+        <div class="signup-box">
+          <p>Already have an account?</p>
+          <button class="btn signup-btn" onclick="window.location.href='login.html'">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
