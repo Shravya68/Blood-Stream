@@ -3,67 +3,247 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BloodStream Signup</title>
-  <link rel="stylesheet" href="login.css">
+  <title>BloodStream Sign Up</title>
+  <link rel="stylesheet" href="auth-style.css">
 </head>
 <body>
 
   <div class="wrapper">
-    <!-- Left Side -->
+
     <div class="left">
-      <h1>Join <span>BloodStream</span></h1>
-      <p>Be a part of a lifesaving network.  
-      Whether you're a patient, donor, or hospital,  
-      your contribution can make a difference.</p>
+      <h1>Every <span>drop</span> counts</h1>
+      <p>Join BloodStream and be part of the life-saving network.</p>
     </div>
 
-    <!-- Right Side -->
     <div class="right">
-      <div class="navbar">
-        <button class="nav-btn active">Patient</button>
-        <button class="nav-btn">Donor</button>
-        <button class="nav-btn">Hospital</button>
-      </div>
-
       <div class="form-box">
-        <h2 class="title">Create Account</h2>
+        
+        <nav class="navbar">
+          <button class="nav-btn active" data-form="patient-form">Patient</button>
+          <button class="nav-btn" data-form="donor-form">Donor</button>
+          <button class="nav-btn" data-form="hospital-form">Hospital</button>
+        </nav>
 
-        <form>
-          <div class="input-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter your full name" required>
+        <div class="form-container">
+
+          <div id="patient-form" class="form-content active">
+            <h2 class="title">Patient Registration</h2>
+            <form id="patient-reg-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="patient-name" placeholder="Enter your full name" required>
+              </div>
+              <div class="input-group">
+                <label>Age</label>
+                <input type="number" id="patient-age" placeholder="Enter your age" required>
+              </div>
+              <div class="input-group">
+                <label>Contact</label>
+                <input type="tel" id="patient-contact" placeholder="Contact Number" required>
+              </div>
+              <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="patient-email" placeholder="Enter your email" required>
+              </div>
+              <div class="input-group">
+                <label>Set Password</label>
+                <input type="password" id="patient-password" placeholder="Create a password" required minlength="6">
+              </div>
+              <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" id="patient-confirm-password" placeholder="Confirm your password" required>
+              </div>
+              <div class="input-group">
+                <label>Medical Condition (if any)</label>
+                <input type="text" id="patient-medical" placeholder="e.g., Anemia">
+              </div>
+              <button type="submit" class="btn signup-btn">Register</button>
+            </form>
           </div>
 
-          <div class="input-group">
-            <label>Email</label>
-            <input type="email" placeholder="Enter your email" required>
+          <div id="donor-form" class="form-content">
+            <h2 class="title">Donor Registration</h2>
+            <form id="donor-reg-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="donor-name" placeholder="Enter your full name" required>
+              </div>
+              <div class="input-group">
+                <label>Age</label>
+                <input type="number" id="donor-age" placeholder="Enter your age" required>
+              </div>
+              <div class="input-group">
+                <label>Contact</label>
+                <input type="tel" id="donor-contact" placeholder="Contact Number" required>
+              </div>
+              <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="donor-email" placeholder="Enter your email" required>
+              </div>
+              <div class="input-group">
+                <label>Set Password</label>
+                <input type="password" id="donor-password" placeholder="Create a password" required minlength="6">
+              </div>
+              <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" id="donor-confirm-password" placeholder="Confirm your password" required>
+              </div>
+              <button type="submit" class="btn signup-btn">Register</button>
+            </form>
           </div>
 
-          <div class="input-group">
-            <label>Password</label>
-            <input type="password" placeholder="Create a password" required>
+          <div id="hospital-form" class="form-content">
+            <h2 class="title">Hospital Registration</h2>
+            <form id="hospital-reg-form">
+              <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="hospital-name" placeholder="Hospital/Clinic Name" required>
+              </div>
+              <div class="input-group">
+                <label>License Number</label>
+                <input type="text" id="hospital-license" placeholder="Enter License Number" required>
+              </div>
+              <div class="input-group">
+                <label>Contact</label>
+                <input type="tel" id="hospital-contact" placeholder="Contact Number" required>
+              </div>
+              <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="hospital-email" placeholder="Enter your email" required>
+              </div>
+              <div class="input-group">
+                <label>Set Password</label>
+                <input type="password" id="hospital-password" placeholder="Create a password" required minlength="6">
+              </div>
+              <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" id="hospital-confirm-password" placeholder="Confirm your password" required>
+              </div>
+              <div class="input-group">
+                <label>State</label>
+                <select id="hospital-state" required>
+                  <option value="" disabled selected>Select State</option>
+                  <option value="State 1">State 1</option>
+                  <option value="State 2">State 2</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>District</label>
+                <select id="hospital-district" required>
+                  <option value="" disabled selected>Select District</option>
+                  <option value="District 1">District 1</option>
+                  <option value="District 2">District 2</option>
+                </select>
+              </div>
+              <button type="submit" class="btn signup-btn">Register</button>
+            </form>
           </div>
+        </div>
 
-          <div class="input-group">
-            <label>Age</label>
-            <input type="number" placeholder="Enter your age" required>
-          </div>
-
-          <div class="input-group">
-            <label>Contact</label>
-            <input type="tel" placeholder="Enter your contact number" required>
-          </div>
-
-          <button type="submit" class="btn login-btn">Sign Up</button>
-        </form>
-
-        <div class="signup-box">
+        <div class="login-box">
           <p>Already have an account?</p>
-          <button class="btn signup-btn" onclick="window.location.href='login.html'">Login</button>
+          <a href="login.html"><button type="button" class="btn login-btn">Login</button></a>
         </div>
       </div>
     </div>
   </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // --- 1. TAB SWITCHING LOGIC ---
+      const navButtons = document.querySelectorAll(".nav-btn");
+      const formContents = document.querySelectorAll(".form-content");
+
+      navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          // Get the target form ID from the button's data attribute
+          const targetFormId = button.getAttribute("data-form");
+
+          // Update button active state
+          navButtons.forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          // Update form visibility
+          formContents.forEach(form => {
+            if (form.id === targetFormId) {
+              form.classList.add("active"); // Show target form
+            } else {
+              form.classList.remove("active"); // Hide others
+            }
+          });
+        });
+      });
+
+      // --- 2. PATIENT FORM SUBMISSION ---
+      document.getElementById("patient-reg-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const password = document.getElementById("patient-password").value;
+        const confirmPassword = document.getElementById("patient-confirm-password").value;
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match. Please try again.");
+          return;
+        }
+
+        const name = document.getElementById("patient-name").value;
+        console.log("--- New Patient Registration ---");
+        console.log("Name:", name);
+        console.log("Age:", document.getElementById("patient-age").value);
+        console.log("Contact:", document.getElementById("patient-contact").value);
+        console.log("Email:", document.getElementById("patient-email").value);
+        console.log("Medical Condition:", document.getElementById("patient-medical").value);
+        
+        alert("Registration successful, " + name + "! Redirecting to login.");
+        window.location.href = "login.html";
+      });
+      
+      // --- 3. DONOR FORM SUBMISSION ---
+      document.getElementById("donor-reg-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const password = document.getElementById("donor-password").value;
+        const confirmPassword = document.getElementById("donor-confirm-password").value;
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match. Please try again.");
+          return;
+        }
+        
+        const name = document.getElementById("donor-name").value;
+        console.log("--- New Donor Registration ---");
+        console.log("Name:", name);
+        console.log("Age:", document.getElementById("donor-age").value);
+        console.log("Contact:", document.getElementById("donor-contact").value);
+        console.log("Email:", document.getElementById("donor-email").value);
+        
+        alert("Registration successful, " + name + "! Redirecting to login.");
+        window.location.href = "login.html";
+      });
+
+      // --- 4. HOSPITAL FORM SUBMISSION ---
+      document.getElementById("hospital-reg-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const password = document.getElementById("hospital-password").value;
+        const confirmPassword = document.getElementById("hospital-confirm-password").value;
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match. Please try again.");
+          return;
+        }
+        
+        const name = document.getElementById("hospital-name").value;
+        console.log("--- New Hospital Registration ---");
+        console.log("Name:", name);
+        console.log("License:", document.getElementById("hospital-license").value);
+        console.log("Contact:", document.getElementById("hospital-contact").value);
+        console.log("Email:", document.getElementById("hospital-email").value);
+        console.log("State:", document.getElementById("hospital-state").value);
+        console.log("District:", document.getElementById("hospital-district").value);
+        
+        alert("Registration successful, " + name + "! Redirecting to login.");
+        window.location.href = "login.html";
+      });
+    });
+  </script>
 </body>
 </html>
