@@ -4,39 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BloodStream Login</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="auth-style.css">
 </head>
 <body>
 
-  <!-- Main Wrapper -->
   <div class="wrapper">
 
-    <!-- Left Section (Image/Info) -->
     <div class="left">
       <h1>Every <span>drop</span> counts</h1>
       <p>Join BloodStream and be part of the life-saving network</p>
     </div>
 
-    <!-- Right Section (Login Form) -->
     <div class="right">
-      <nav class="navbar">
-        <button class="nav-btn active">Patient</button>
-        <button class="nav-btn">Donor</button>
-        <button class="nav-btn">Hospital</button>
-      </nav>
-
       <div class="form-box">
+        
+        <nav class="navbar">
+          <button class="nav-btn active">Patient</button>
+          <button class="nav-btn">Donor</button>
+          <button class="nav-btn">Hospital</button>
+        </nav>
+
         <h2 class="title">Patient Login</h2>
         
-        <form>
+        <form id="login-form">
           <div class="input-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" id="login-email" placeholder="Enter your email" required>
           </div>
 
           <div class="input-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required>
+            <input type="password" id="login-password" placeholder="Enter your password" required>
           </div>
 
           <button type="submit" class="btn login-btn">Login</button>
@@ -44,11 +42,64 @@
 
         <div class="signup-box">
           <p>New here?</p>
-          <a href="signup.html"><button class="btn signup-btn">Sign Up</button></a>
+          <a href="signup.html"><button type="button" class="btn signup-btn">Sign Up</button></a>
         </div>
       </div>
     </div>
   </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // --- 1. TAB SWITCHING FUNCTIONALITY ---
+      const navButtons = document.querySelectorAll(".nav-btn");
+      const loginTitle = document.querySelector(".title");
+
+      navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          const userType = button.textContent;
+          loginTitle.textContent = userType + " Login";
+          
+          navButtons.forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+        });
+      });
+
+      
+      // --- 2. FORM SUBMISSION FUNCTIONALITY ---
+      const loginForm = document.getElementById("login-form");
+
+      loginForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+        const userType = document.querySelector(".nav-btn.active").textContent;
+
+        console.log("--- Login Attempt ---");
+        console.log("User Type:", userType);
+        console.log("Email:", email);
+        console.log("Password:", password);
+        
+        // --- IMPORTANT ---
+        // In a real app, you would first check if the email and password are correct.
+        // For this demo, we will just show an alert and redirect.
+
+        alert("Login attempt for " + userType + " successful!");
+        
+        // --- NEW: REDIRECTION LOGIC ---
+        if (userType === "Patient") {
+          window.location.href = "pd.html";
+        } else if (userType === "Donor") {
+          // You will need to create this file
+          window.location.href = "donor-dashboard.html"; 
+        } else if (userType === "Hospital") {
+          // You will need to create this file
+          window.location.href = "hospital-dashboard.html"; 
+        }
+      });
+
+    });
+  </script>
 </body>
 </html>
