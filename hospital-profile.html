@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Profile - BloodStream</title>
+  <link rel="stylesheet" href="hospital-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="hospital-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house-medical"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="blood-inventory.html" class="nav-item">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Blood Inventory</span>
+        </a>
+        <a href="manage-requests.html" class="nav-item">
+          <i class="fa-solid fa-file-circle-check"></i>
+          <span>Manage Requests</span>
+        </a>
+        <a href="hospital-profile.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-hospital-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="main-header">
+        <h1>Hospital Profile</h1>
+      </header>
+
+      <div class="content-row">
+        <!-- Hospital Info Card -->
+        <section class="card" id="hospital-info">
+          <h2><i class="fa-solid fa-user-edit"></i> Hospital Information</h2>
+          <form id="profile-form" class="form-grid">
+            <div class="form-group full-width">
+              <label for="hospital-name">Hospital Name</label>
+              <input type="text" id="hospital-name" value="City Hospital">
+            </div>
+             <div class="form-group">
+              <label for="hospital-email">Email</label>
+              <input type="email" id="hospital-email" value="contact@cityhospital.com">
+            </div>
+             <div class="form-group">
+              <label for="hospital-contact">Contact Number</label>
+              <input type="tel" id="hospital-contact" value="(555) 123-4567">
+            </div>
+            <div class="form-group">
+              <label for="hospital-license">License Number</label>
+              <input type="text" id="hospital-license" value="LIC-12345XYZ">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Security Card -->
+        <section class="card" id="security-info">
+          <h2><i class="fa-solid fa-lock"></i> Change Password</h2>
+          <form id="password-form" class="form-grid">
+              <div class="form-group">
+                <label for="current-password">Current Password</label>
+                <input type="password" id="current-password" placeholder="Enter current password" required>
+              </div>
+               <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter a new password" required minlength="6">
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Confirm New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password" required>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn-secondary">Update Password</button>
+              </div>
+          </form>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // --- 1. Handle Profile Information Form ---
+      const profileForm = document.getElementById('profile-form');
+      profileForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        // Get updated values
+        const hospitalName = document.getElementById('hospital-name').value;
+        const hospitalEmail = document.getElementById('hospital-email').value;
+        const hospitalContact = document.getElementById('hospital-contact').value;
+        const hospitalLicense = document.getElementById('hospital-license').value;
+
+        // In a real app, you would send this to a server. For now, we log it.
+        console.log('--- Profile Information Updated ---');
+        console.log('Name:', hospitalName);
+        console.log('Email:', hospitalEmail);
+        console.log('Contact:', hospitalContact);
+        console.log('License:', hospitalLicense);
+
+        alert('Hospital information has been saved successfully!');
+      });
+
+
+      // --- 2. Handle Password Change Form ---
+      const passwordForm = document.getElementById('password-form');
+      passwordForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        // Get password values
+        const currentPassword = document.getElementById('current-password').value;
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        // Validation: Check if new passwords match
+        if (newPassword !== confirmPassword) {
+          alert('Error: New passwords do not match. Please try again.');
+          return; // Stop the function
+        }
+        
+        // Validation: Check if new password is same as old
+        if (currentPassword === newPassword) {
+            alert('Error: New password cannot be the same as the current password.');
+            return;
+        }
+
+        // In a real app, you would verify the current password first.
+        console.log('--- Password Change Attempt ---');
+        console.log('Current Password:', currentPassword);
+        console.log('New Password:', newPassword);
+
+        alert('Password has been changed successfully!');
+        passwordForm.reset(); // Clear the form fields for security
+      });
+
+    });
+  </script>
+
+</body>
+</html>
+

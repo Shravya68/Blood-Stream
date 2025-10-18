@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Requests - BloodStream</title>
+  <link rel="stylesheet" href="pd.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="pd.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="make-request.html" class="nav-item">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Make a Request</span>
+        </a>
+        <a href="my-requests.html" class="nav-item active"> <i class="fa-solid fa-file-lines"></i>
+          <span>My Requests</span>
+        </a>
+        <a href="my-profile.html" class="nav-item">
+          <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="main-header">
+        <h1>My Request History</h1>
+        <div class="header-user-icons">
+          <i class="fa-solid fa-bell"></i>
+          <i class="fa-solid fa-user-circle"></i>
+        </div>
+      </header>
+
+      <div class="content-row">
+        <section class="card" id="request-history">
+          <h2><i class="fa-solid fa-file-lines"></i> All Requests</h2>
+          
+          <div class="request-filters">
+            <div class="form-group">
+              <label for="filter-status">Filter by Status</label>
+              <select id="filter-status">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="fulfilled">Fulfilled</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sort-date">Sort by Date</label>
+              <select id="sort-date">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+              </select>
+            </div>
+          </div>
+          
+          <table class="requests-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Date</th>
+                <th>Hospital</th>
+                <th>Blood Type</th>
+                <th>Units</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#R4582</td>
+                <td>17 Oct 2025</td>
+                <td>City Hospital</td>
+                <td>A+</td>
+                <td>2</td>
+                <td><span class="status pending">Pending</span></td>
+              </tr>
+              <tr>
+                <td>#R4501</td>
+                <td>12 Sep 2025</td>
+                <td>General Hospital</td>
+                <td>B-</td>
+                <td>1</td>
+                <td><span class="status fulfilled">Fulfilled</span></td>
+              </tr>
+              <tr>
+                <td>#R4490</td>
+                <td>02 Sep 2025</td>
+                <td>City Hospital</td>
+                <td>A+</td>
+                <td>3</td>
+                <td><span class="status cancelled">Cancelled</span></td>
+              </tr>
+              <tr>
+                <td>#R4450</td>
+                <td>15 Aug 2025</td>
+                <td>St. Jude's</td>
+                <td>O+</td>
+                <td>2</td>
+                <td><span class="status fulfilled">Fulfilled</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+
+  </div>
+</body>
+</html>

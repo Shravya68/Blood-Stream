@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - BloodStream</title>
+  <link rel="stylesheet" href="pd.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="patient-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="make-request.html" class="nav-item">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Make a Request</span>
+        </a>
+        <a href="my-requests.html" class="nav-item">
+          <i class="fa-solid fa-file-lines"></i>
+          <span>My Requests</span>
+        </a>
+        <a href="my-profile.html" class="nav-item active"> <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="main-header">
+        <h1>My Profile</h1>
+        <div class="header-user-icons">
+          <i class="fa-solid fa-bell"></i>
+          <i class="fa-solid fa-user-circle"></i>
+        </div>
+      </header>
+
+      <div class="content-row">
+        <section class="card" id="personal-info">
+          <h2><i class="fa-solid fa-user-edit"></i> Personal Information</h2>
+          <form id="profile-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" value="Demo Patient">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="patient@demo.com" readonly>
+              </div>
+              <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input type="tel" id="contact" value="+91 1234567890">
+              </div>
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" value="34">
+              </div>
+              <div class="form-group">
+                <label for="blood-type">Blood Type</label>
+                <input type="text" id="blood-type" value="A+ Positive" readonly>
+              </div>
+              <div class="form-group">
+                <label for="medical-condition">Medical Condition</label>
+                <input type="text" id="medical-condition" value="Thalassemia">
+              </div>
+            </div>
+            <button type="submit" class="btn-search">Save Changes</button>
+          </form>
+        </section>
+
+        <section class="card" id="security-info">
+          <h2><i class="fa-solid fa-lock"></i> Security & Password</h2>
+          <form id="password-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="current-password">Current Password</label>
+                <input type="password" id="current-password" placeholder="Enter your current password" required>
+              </div>
+              <div class="form-group">
+              </div>
+              <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter a new password" required minlength="6">
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Confirm New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password" required>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit-request">Change Password</button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // --- 1. Handle Profile Information Form ---
+      const profileForm = document.getElementById("profile-form");
+      profileForm.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        // Get updated values
+        const fullName = document.getElementById("full-name").value;
+        const contact = document.getElementById("contact").value;
+        const age = document.getElementById("age").value;
+        const medicalCondition = document.getElementById("medical-condition").value;
+
+        // In a real app, you would send this to a server.
+        console.log("--- Profile Update ---");
+        console.log("Full Name:", fullName);
+        console.log("Contact:", contact);
+        console.log("Age:", age);
+        console.log("Medical Condition:", medicalCondition);
+
+        alert("Personal information saved successfully!");
+      });
+
+      // --- 2. Handle Password Change Form ---
+      const passwordForm = document.getElementById("password-form");
+      passwordForm.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent page reload
+
+        // Get password values
+        const currentPassword = document.getElementById("current-password").value;
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+        
+        // --- Validation ---
+        if (newPassword !== confirmPassword) {
+          alert("New passwords do not match. Please try again.");
+          return; // Stop the function if passwords don't match
+        }
+
+        // In a real app, you'd verify the current password first.
+        console.log("--- Password Change Attempt ---");
+        console.log("Current Password:", currentPassword);
+        console.log("New Password:", newPassword);
+
+        alert("Password changed successfully!");
+        
+        // Clear the form fields for security
+        passwordForm.reset();
+      });
+
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donor Dashboard - BloodStream</title>
+  <link rel="stylesheet" href="donor-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <!-- --- Sidebar Navigation --- -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="donor-dashboard.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="donation-requests.html" class="nav-item">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>View Requests</span>
+        </a>
+        <a href="donation-history.html" class="nav-item">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Donation History</span>
+        </a>
+        <a href="donor-profile.html" class="nav-item">
+          <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- --- Main Content Area --- -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="main-header">
+        <h1>Welcome, Donor!</h1>
+        <div class="header-user-icons">
+          <i class="fa-solid fa-bell" id="notification-bell"></i>
+          <i class="fa-solid fa-user-circle"></i>
+        </div>
+      </header>
+
+      <!-- --- NEW: Profile Completion Banner (Initially Hidden) --- -->
+      <div class="notification-banner" id="profile-banner">
+        <p><strong>Your profile is incomplete!</strong> Please add your medical details to find relevant donation opportunities.</p>
+        <a href="donor-profile.html" class="btn-primary">Complete Profile</a>
+      </div>
+
+      <!-- Stats Cards -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="color: #c00;">
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-title">Your Blood Type</span>
+            <span class="stat-value">O+ Positive</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color: #28a745;">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-title">Total Donations</span>
+            <span class="stat-value">5</span>
+          </div>
+        </div>
+        <div class="stat-card" id="eligibility-card">
+          <div class="stat-icon" style="color: #007bff;">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-title">Next Eligible Date</span>
+            <!-- This date is for the JS to read -->
+            <span class="stat-value" data-date="2025-09-25">25 Sep 2025</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Content Row -->
+      <div class="content-row">
+
+        <!-- Urgent Requests -->
+        <section class="card" id="urgent-requests">
+          <h2><i class="fa-solid fa-triangle-exclamation"></i> Urgent Requests Nearby</h2>
+          <div class="request-list">
+            <!-- Request Item 1 -->
+            <div class="request-item">
+              <div class="request-info">
+                <h3>A+ Blood Needed</h3>
+                <p>City Hospital, District 1</p>
+              </div>
+              <a href="donation-requests.html" class="btn-primary">View Details</a>
+            </div>
+            <!-- Request Item 2 -->
+            <div class="request-item">
+              <div class="request-info">
+                <h3>O- Blood Needed</h3>
+                <p>General Hospital, District 2</p>
+              </div>
+              <a href="donation-requests.html" class="btn-primary">View Details</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Donation Centers Map -->
+        <section class="card" id="map-card">
+            <h2><i class="fa-solid fa-map-location-dot"></i> Nearby Donation Centers</h2>
+            <!-- Placeholder for an interactive map -->
+            <div class="map-placeholder">
+                <img src="https://placehold.co/600x400/e2e8f0/4a5568?text=Map+of+Donation+Centers" alt="Map Placeholder">
+            </div>
+        </section>
+        
+      </div>
+    </main>
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // --- 1. Check Donation Eligibility ---
+      const eligibilityCard = document.getElementById('eligibility-card');
+      const dateElement = eligibilityCard.querySelector('.stat-value');
+      const titleElement = eligibilityCard.querySelector('.stat-title');
+      
+      // Get the date from the data attribute (e.g., "2025-09-25")
+      const eligibleDate = new Date(dateElement.getAttribute('data-date'));
+      const today = new Date();
+
+      // Set time to 0 to compare dates only
+      eligibleDate.setHours(0,0,0,0);
+      today.setHours(0,0,0,0);
+
+      if (today >= eligibleDate) {
+        // If today is on or after the eligible date, the donor can donate
+        titleElement.textContent = "Eligibility Status";
+        dateElement.textContent = "You can Donate!";
+        eligibilityCard.classList.add('eligible'); // Add a class for special styling
+      }
+
+      // --- 2. Simulate Profile Completion Check ---
+      // In a real app, this value would come from a server. We'll simulate it here.
+      const isProfileComplete = false; // Change to 'true' to hide the banner
+      const profileBanner = document.getElementById('profile-banner');
+
+      if (!isProfileComplete) {
+        profileBanner.style.display = 'flex'; // Show the banner if profile is incomplete
+      }
+
+      // --- 3. Simulate Notifications ---
+      const notificationBell = document.getElementById('notification-bell');
+      // In a real app, check if there are actual new notifications
+      const hasNotifications = true; 
+
+      if (hasNotifications) {
+        notificationBell.classList.add('has-notifications');
+      }
+
+    });
+  </script>
+
+</body>
+</html>
+

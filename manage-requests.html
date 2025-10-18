@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Requests - BloodStream</title>
+  <link rel="stylesheet" href="hospital-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="hospital-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house-medical"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="blood-inventory.html" class="nav-item">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Blood Inventory</span>
+        </a>
+        <a href="manage-requests.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-file-circle-check"></i>
+          <span>Manage Requests</span>
+        </a>
+        <a href="hospital-profile.html" class="nav-item">
+          <i class="fa-solid fa-hospital-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="main-header">
+        <h1>Manage Blood Requests</h1>
+      </header>
+      <section class="card" id="requests-list">
+        <h2><i class="fa-solid fa-inbox"></i> Incoming Requests</h2>
+        <table class="requests-table">
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Requested By</th>
+              <th>Blood Type</th>
+              <th>Urgency</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#R4582</td>
+              <td>Patient #P4582</td>
+              <td>A+</td>
+              <td><span class="urgency high">Emergency</span></td>
+              <td class="action-buttons"><button class="btn-approve">Approve</button><button class="btn-decline">Decline</button></td>
+            </tr>
+            <tr>
+              <td>#R4580</td>
+              <td>Patient #P4580</td>
+              <td>B-</td>
+              <td><span class="urgency high">Urgent</span></td>
+              <td class="action-buttons"><button class="btn-approve">Approve</button><button class="btn-decline">Decline</button></td>
+            </tr>
+             <tr>
+              <td>#R4575</td>
+              <td>General Hospital</td>
+              <td>O-</td>
+              <td><span class="urgency medium">Standard</span></td>
+              <td class="action-buttons"><button class="btn-approve">Approve</button><button class="btn-decline">Decline</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // Select all approve and decline buttons
+      const approveButtons = document.querySelectorAll(".btn-approve");
+      const declineButtons = document.querySelectorAll(".btn-decline");
+
+      // Add event listener for all "Approve" buttons
+      approveButtons.forEach(button => {
+        button.addEventListener("click", function() {
+          handleRequestAction(this, "Approved");
+        });
+      });
+
+      // Add event listener for all "Decline" buttons
+      declineButtons.forEach(button => {
+        button.addEventListener("click", function() {
+          handleRequestAction(this, "Declined");
+        });
+      });
+
+      function handleRequestAction(buttonElement, action) {
+        // Find the parent table row (tr) of the clicked button
+        const row = buttonElement.closest("tr");
+        
+        // Get the Request ID from the first cell (td) in the row
+        const requestId = row.querySelector("td").textContent;
+
+        // Give feedback to the user
+        alert(`Request ${requestId} has been ${action}.`);
+
+        // Log the action to the console for demonstration
+        console.log(`Action: ${action} for Request ID: ${requestId}`);
+
+        // In a real application, you would send this to a server.
+        // For now, we will just remove the row from the UI to show it's been handled.
+        row.style.opacity = '0';
+        setTimeout(() => {
+            row.remove();
+        }, 300); // Remove after a short fade-out effect
+      }
+    });
+  </script>
+
+</body>
+</html>
+

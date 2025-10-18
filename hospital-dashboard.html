@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Dashboard - BloodStream</title>
+  <link rel="stylesheet" href="hospital-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <!-- --- Sidebar Navigation --- -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="hospital-dashboard.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-house-medical"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="blood-inventory.html" class="nav-item">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Blood Inventory</span>
+        </a>
+        <a href="manage-requests.html" class="nav-item">
+          <i class="fa-solid fa-file-circle-check"></i>
+          <span>Manage Requests</span>
+        </a>
+        <a href="hospital-profile.html" class="nav-item">
+          <i class="fa-solid fa-hospital-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- --- Main Content Area --- -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="main-header">
+        <h1>City Hospital Dashboard</h1>
+        <div class="header-user-icons">
+          <i class="fa-solid fa-bell" id="notification-bell"></i>
+          <i class="fa-solid fa-user-circle"></i>
+        </div>
+      </header>
+
+      <!-- Stats Cards -->
+      <section class="stats-grid">
+        <div class="stat-card clickable" id="stock-card">
+          <div class="stat-icon" style="color: #c00;">
+            <i class="fa-solid fa-cubes"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-title">Blood Units in Stock</span>
+            <span class="stat-value">256</span>
+          </div>
+        </div>
+        <div class="stat-card clickable" id="requests-card">
+          <div class="stat-icon" style="color: #ffc107;">
+            <i class="fa-solid fa-inbox"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-title">Pending Requests</span>
+            <span class="stat-value">12</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="color: #28a745;">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-title">Available Donors</span>
+            <span class="stat-value">45</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Content Row -->
+      <div class="content-row">
+
+        <!-- Blood Stock Overview -->
+        <section class="card" id="stock-overview">
+          <h2><i class="fa-solid fa-chart-pie"></i> Blood Stock Overview</h2>
+          <div class="stock-list">
+            <div class="stock-item">
+              <span class="blood-group">A+</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 75%;"></div>
+              </div>
+              <span class="unit-count">75 Units</span>
+            </div>
+            <div class="stock-item">
+              <span class="blood-group">O+</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 90%;"></div>
+              </div>
+              <span class="unit-count">90 Units</span>
+            </div>
+            <div class="stock-item">
+              <span class="blood-group">B-</span>
+              <div class="progress-bar-container">
+                <div class="progress-bar low" style="width: 20%;"></div>
+              </div>
+              <span class="unit-count">20 Units</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Urgent Requests -->
+        <section class="card" id="urgent-requests">
+            <h2><i class="fa-solid fa-triangle-exclamation"></i> Recent Urgent Requests</h2>
+            <table class="requests-table">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Blood Type</th>
+                        <th>Urgency</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#R4582</td>
+                        <td>A+</td>
+                        <td><span class="urgency high">Emergency</span></td>
+                        <td><a href="manage-requests.html" class="btn-primary">View</a></td>
+                    </tr>
+                     <tr>
+                        <td>#R4580</td>
+                        <td>B-</td>
+                        <td><span class="urgency high">Urgent</span></td>
+                        <td><a href="manage-requests.html" class="btn-primary">View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+      </div>
+    </main>
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // --- 1. Make Stat Cards Clickable ---
+      const stockCard = document.getElementById('stock-card');
+      const requestsCard = document.getElementById('requests-card');
+
+      if (stockCard) {
+        stockCard.addEventListener('click', () => {
+          window.location.href = 'blood-inventory.html';
+        });
+      }
+
+      if (requestsCard) {
+        requestsCard.addEventListener('click', () => {
+          window.location.href = 'manage-requests.html';
+        });
+      }
+
+      // --- 2. Simulate Notifications ---
+      const notificationBell = document.getElementById('notification-bell');
+      // In a real app, this value would come from a server.
+      const hasNotifications = true; // Set to false to hide the dot
+
+      if (hasNotifications) {
+        notificationBell.classList.add('has-notifications');
+      }
+
+    });
+  </script>
+
+</body>
+</html>
+

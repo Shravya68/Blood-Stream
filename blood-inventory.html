@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Inventory - BloodStream</title>
+  <link rel="stylesheet" href="hospital-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="hospital-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house-medical"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="blood-inventory.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Blood Inventory</span>
+        </a>
+        <a href="manage-requests.html" class="nav-item">
+          <i class="fa-solid fa-file-circle-check"></i>
+          <span>Manage Requests</span>
+        </a>
+        <a href="hospital-profile.html" class="nav-item">
+          <i class="fa-solid fa-hospital-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="main-header">
+        <h1>Blood Inventory Management</h1>
+      </header>
+
+      <div class="content-row">
+        <!-- Add New Stock Form -->
+        <section class="card" id="add-stock-card">
+          <h2><i class="fa-solid fa-plus-circle"></i> Add New Blood Stock</h2>
+          <form id="add-stock-form" class="form-grid">
+            <div class="form-group">
+              <label for="add-blood-type">Blood Type</label>
+              <select id="add-blood-type" required>
+                <option value="" disabled selected>Select Type</option>
+                <option value="A+">A+</option>
+                <option value="O+">O+</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="A-">A-</option>
+                <option value="O-">O-</option>
+                <option value="B-">B-</option>
+                <option value="AB-">AB-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="add-units">Units Added</label>
+              <input type="number" id="add-units" min="1" placeholder="e.g., 5" required>
+            </div>
+            <div class="form-group">
+              <label for="add-date">Date Received</label>
+              <input type="date" id="add-date" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-primary">Add Stock</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Inventory Table -->
+        <section class="card" id="inventory-table-card">
+          <h2><i class="fa-solid fa-table-list"></i> Current Inventory</h2>
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th>Blood Type</th>
+                <th>Units in Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>A+</td><td>75</td><td><span class="status good">Good</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+              <tr><td>O+</td><td>90</td><td><span class="status good">Good</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+              <tr><td>B+</td><td>30</td><td><span class="status okay">Okay</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+              <tr><td>AB+</td><td>25</td><td><span class="status okay">Okay</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+              <tr><td>A-</td><td>22</td><td><span class="status low">Low</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+              <tr><td>O-</td><td>12</td><td><span class="status low">Low</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+              <tr><td>B-</td><td>20</td><td><span class="status okay">Okay</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+              <tr><td>AB-</td><td>5</td><td><span class="status critical">Critical</span></td><td><button class="btn-secondary btn-update">Update</button></td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- --- NEW: Update Stock Modal (Initially Hidden) --- -->
+  <div id="update-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2 id="modal-title">Update Stock</h2>
+      <form id="update-stock-form">
+        <div class="form-group">
+          <label for="update-units">New Unit Count</label>
+          <input type="number" id="update-units" min="0" required>
+        </div>
+        <button type="submit" class="btn-primary">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      // --- 1. Add Stock Form Submission ---
+      const addStockForm = document.getElementById('add-stock-form');
+      addStockForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const bloodType = document.getElementById('add-blood-type').value;
+        const units = document.getElementById('add-units').value;
+        const date = document.getElementById('add-date').value;
+
+        // In a real app, you would send this to a server. For now, we log it.
+        console.log('--- New Stock Added ---');
+        console.log('Blood Type:', bloodType);
+        console.log('Units:', units);
+        console.log('Date:', date);
+        
+        alert(`Successfully added ${units} units of ${bloodType} blood.`);
+        addStockForm.reset();
+      });
+
+      // --- 2. Update Stock Modal Functionality ---
+      const modal = document.getElementById('update-modal');
+      const closeModalButton = document.querySelector('.close-button');
+      const updateButtons = document.querySelectorAll('.btn-update');
+      const modalTitle = document.getElementById('modal-title');
+      const updateUnitsInput = document.getElementById('update-units');
+      const updateStockForm = document.getElementById('update-stock-form');
+      let currentRow = null; // To store which table row is being edited
+
+      // Open the modal when any "Update" button is clicked
+      updateButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          currentRow = this.closest('tr');
+          const bloodType = currentRow.cells[0].textContent;
+          const currentUnits = currentRow.cells[1].textContent;
+
+          modalTitle.textContent = `Update Stock for ${bloodType}`;
+          updateUnitsInput.value = currentUnits;
+          modal.style.display = 'flex';
+        });
+      });
+
+      // Close the modal when the 'x' is clicked
+      closeModalButton.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+
+      // Close the modal if user clicks outside the content box
+      window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+      
+      // Handle the submission of the update form inside the modal
+      updateStockForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const newUnits = updateUnitsInput.value;
+
+        // Update the table cell with the new value
+        if (currentRow) {
+          currentRow.cells[1].textContent = newUnits;
+          // In a real app, you'd also update the status (Good, Low, etc.) here
+        }
+
+        const bloodType = currentRow.cells[0].textContent;
+        console.log('--- Stock Updated ---');
+        console.log('Blood Type:', bloodType);
+        console.log('New Units:', newUnits);
+
+        alert(`Stock for ${bloodType} updated to ${newUnits} units.`);
+        modal.style.display = 'none';
+      });
+
+    });
+  </script>
+</body>
+</html>
+

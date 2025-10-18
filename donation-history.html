@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation History - BloodStream</title>
+  <link rel="stylesheet" href="donor-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="donor-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="donation-requests.html" class="nav-item">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>View Requests</span>
+        </a>
+        <a href="donation-history.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Donation History</span>
+        </a>
+        <a href="donor-profile.html" class="nav-item">
+          <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="main-header">
+        <h1>My Donation History</h1>
+      </header>
+
+      <section class="card" id="history-card">
+        <h2><i class="fa-solid fa-book-medical"></i> Your Past Donations</h2>
+        <table class="requests-table sortable">
+          <thead>
+            <tr>
+              <th data-column="0">Donation ID</th>
+              <th data-column="1">Date</th>
+              <th data-column="2">Donation Center</th>
+              <th data-column="3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#D105</td>
+              <td>15 Aug 2025</td>
+              <td>City Hospital Blood Bank</td>
+              <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+             <tr>
+              <td>#D104</td>
+              <td>20 May 2025</td>
+              <td>Red Cross Mobile Drive</td>
+              <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td>#D102</td>
+              <td>01 Feb 2025</td>
+              <td>General Hospital</td>
+              <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      const table = document.querySelector(".sortable");
+      const headers = table.querySelectorAll("th");
+      const tbody = table.querySelector("tbody");
+
+      headers.forEach((header, index) => {
+        header.addEventListener("click", () => {
+          sortTable(index);
+        });
+      });
+
+      function sortTable(columnIndex) {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const currentHeader = headers[columnIndex];
+        const isAscending = currentHeader.classList.contains("sort-asc");
+
+        // Remove sorting classes from all headers
+        headers.forEach(h => h.classList.remove("sort-asc", "sort-desc"));
+
+        // Set new sorting direction
+        if (isAscending) {
+          currentHeader.classList.add("sort-desc");
+        } else {
+          currentHeader.classList.add("sort-asc");
+        }
+        
+        const direction = isAscending ? -1 : 1;
+
+        // Sort the rows
+        rows.sort((rowA, rowB) => {
+          let cellA = rowA.querySelectorAll("td")[columnIndex].textContent.trim();
+          let cellB = rowB.querySelectorAll("td")[columnIndex].textContent.trim();
+
+          // Special handling for dates (column 1)
+          if (columnIndex === 1) {
+            cellA = new Date(cellA);
+            cellB = new Date(cellB);
+          }
+
+          if (cellA < cellB) {
+            return -1 * direction;
+          }
+          if (cellA > cellB) {
+            return 1 * direction;
+          }
+          return 0;
+        });
+
+        // Re-append sorted rows to the table
+        rows.forEach(row => tbody.appendChild(row));
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation History - BloodStream</title>
+  <link rel="stylesheet" href="donor-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="donor-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="donation-requests.html" class="nav-item">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>View Requests</span>
+        </a>
+        <a href="donation-history.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Donation History</span>
+        </a>
+        <a href="donor-profile.html" class="nav-item">
+          <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="main-header">
+        <h1>My Donation History</h1>
+      </header>
+
+      <section class="card" id="history-card">
+        <h2><i class="fa-solid fa-book-medical"></i> Your Past Donations</h2>
+        <table class="requests-table sortable">
+          <thead>
+            <tr>
+              <th data-column="0">Donation ID</th>
+              <th data-column="1">Date</th>
+              <th data-column="2">Donation Center</th>
+              <th data-column="3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#D105</td>
+              <td>15 Aug 2025</td>
+              <td>City Hospital Blood Bank</td>
+              <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+             <tr>
+              <td>#D104</td>
+              <td>20 May 2025</td>
+              <td>Red Cross Mobile Drive</td>
+              <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+            <tr>
+              <td>#D102</td>
+              <td>01 Feb 2025</td>
+              <td>General Hospital</td>
+              <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      const table = document.querySelector(".sortable");
+      const headers = table.querySelectorAll("th");
+      const tbody = table.querySelector("tbody");
+
+      headers.forEach((header, index) => {
+        header.addEventListener("click", () => {
+          sortTable(index);
+        });
+      });
+
+      function sortTable(columnIndex) {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const currentHeader = headers[columnIndex];
+        const isAscending = currentHeader.classList.contains("sort-asc");
+
+        // Remove sorting classes from all headers
+        headers.forEach(h => h.classList.remove("sort-asc", "sort-desc"));
+
+        // Set new sorting direction
+        if (isAscending) {
+          currentHeader.classList.add("sort-desc");
+        } else {
+          currentHeader.classList.add("sort-asc");
+        }
+        
+        const direction = isAscending ? -1 : 1;
+
+        // Sort the rows
+        rows.sort((rowA, rowB) => {
+          let cellA = rowA.querySelectorAll("td")[columnIndex].textContent.trim();
+          let cellB = rowB.querySelectorAll("td")[columnIndex].textContent.trim();
+
+          // Special handling for dates (column 1)
+          if (columnIndex === 1) {
+            cellA = new Date(cellA);
+            cellB = new Date(cellB);
+          }
+
+          if (cellA < cellB) {
+            return -1 * direction;
+          }
+          if (cellA > cellB) {
+            return 1 * direction;
+          }
+          return 0;
+        });
+
+        // Re-append sorted rows to the table
+        rows.forEach(row => tbody.appendChild(row));
+      }
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make a Request - BloodStream</title>
+  <link rel="stylesheet" href="pd.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="patient-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="make-request.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-droplet"></i>
+          <span>Make a Request</span>
+        </a>
+        <a href="my-requests.html" class="nav-item">
+          <i class="fa-solid fa-file-lines"></i>
+          <span>My Requests</span>
+        </a>
+        <a href="my-profile.html" class="nav-item">
+          <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="main-header">
+        <h1>Make a Request</h1>
+        <div class="header-user-icons">
+          <i class="fa-solid fa-bell"></i>
+          <i class="fa-solid fa-user-circle"></i>
+        </div>
+      </header>
+
+      <div class="content-row">
+        <section class="card" id="request-form-card">
+          <h2><i class="fa-solid fa-droplet"></i> New Blood Request</h2>
+          
+          <p class="form-description">
+            This form creates a <strong>general request</strong> that is visible to all donors and hospitals in the network. To request from a specific hospital, use the "Find Blood" search on your dashboard.
+          </p>
+          <form id="request-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="blood-type">Blood Type</label>
+                <select id="blood-type" required>
+                  <option value="" disabled selected>Select Blood Type</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="units">Units Required</label>
+                <input type="number" id="units" placeholder="e.g., 2" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="urgency">Urgency</label>
+                <select id="urgency" required>
+                  <option value="standard">Standard (3-5 days)</option>
+                  <option value="urgent">Urgent (Within 24 hours)</option>
+                  <option value="emergency">Emergency (Immediately)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-person">Contact Number</label>
+                <input type="tel" id="contact-person" placeholder="Your contact number">
+              </div>
+              <div class="form-group full-width">
+                <label for="hospital-name">Hospital Name & Address (Your Location)</label>
+                <input type="text" id="hospital-name" placeholder="e.g., City Hospital, 123 Main St" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="notes">Reason / Additional Notes (Optional)</label>
+                <textarea id="notes" placeholder="Any additional details..."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit-request">Submit General Request</button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const requestForm = document.getElementById("request-form");
+
+      requestForm.addEventListener("submit", function(event) {
+        // Prevent the form from reloading the page
+        event.preventDefault();
+
+        // Get all the form values
+        const bloodType = document.getElementById("blood-type").value;
+        const units = document.getElementById("units").value;
+        const urgency = document.getElementById("urgency").value;
+        const contact = document.getElementById("contact-person").value;
+        const hospital = document.getElementById("hospital-name").value;
+        const notes = document.getElementById("notes").value;
+
+        // --- Data Simulation ---
+        // In a real app, you would send this data to a server.
+        // For now, we'll just log it to the console.
+        
+        console.log("--- New General Blood Request ---");
+        console.log("Blood Type:", bloodType);
+        console.log("Units:", units);
+        console.log("Urgency:", urgency);
+        console.log("Contact:", contact);
+        console.log("Hospital:", hospital);
+        console.log("Notes:", notes);
+
+        // --- Success Feedback ---
+        alert("Your general request has been submitted successfully!\nYou will now be redirected to your request history.");
+
+        // Redirect to the My Requests page so the user can see their new request
+        window.location.href = "my-requests.html";
+      });
+    });
+  </script>
+
+</body>
+</html>

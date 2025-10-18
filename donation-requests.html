@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donation Requests - BloodStream</title>
+  <link rel="stylesheet" href="donor-dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">🩸 BloodStream</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="donor-dashboard.html" class="nav-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="donation-requests.html" class="nav-item active"> <!-- Active Page -->
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>View Requests</span>
+        </a>
+        <a href="donation-history.html" class="nav-item">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Donation History</span>
+        </a>
+        <a href="donor-profile.html" class="nav-item">
+          <i class="fa-solid fa-user"></i>
+          <span>My Profile</span>
+        </a>
+        <a href="index.html" class="nav-item nav-logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="main-header">
+        <h1>Active Blood Requests</h1>
+      </header>
+
+      <section class="card" id="request-list-card">
+        <h2><i class="fa-solid fa-list-check"></i> Find an Opportunity to Help</h2>
+        
+        <div class="request-filters">
+          <div class="form-group">
+            <label for="filter-state">State</label>
+            <select id="filter-state"><option>All States</option></select>
+          </div>
+          <div class="form-group">
+            <label for="filter-district">District</label>
+            <select id="filter-district"><option>All Districts</option></select>
+          </div>
+          <div class="form-group">
+            <label for="filter-blood-type">Blood Type</label>
+            <select id="filter-blood-type"><option>All Types</option></select>
+          </div>
+        </div>
+        
+        <table class="requests-table">
+          <thead>
+            <tr>
+              <th>Patient / Hospital</th>
+              <th>Location</th>
+              <th>Blood Type</th>
+              <th>Urgency</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Patient (#P4582)</td>
+              <td>City Hospital, District 1</td>
+              <td>A+</td>
+              <td><span class="urgency high">Urgent</span></td>
+              <td><button class="btn-primary">Pledge to Donate</button></td>
+            </tr>
+            <tr>
+              <td>General Hospital</td>
+              <td>District 2</td>
+              <td>O-</td>
+              <td><span class="urgency high">Urgent</span></td>
+              <td><button class="btn-primary">Pledge to Donate</button></td>
+            </tr>
+            <tr>
+              <td>Patient (#P4490)</td>
+              <td>St. Jude's, District 1</td>
+              <td>B+</td>
+              <td><span class="urgency medium">Standard</span></td>
+              <td><button class="btn-primary">Pledge to Donate</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- --- EMBEDDED JAVASCRIPT --- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+      // --- 1. Pledge Button Functionality ---
+      const pledgeButtons = document.querySelectorAll('.btn-primary');
+
+      pledgeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Get info from the table row the button is in
+          const row = this.closest('tr');
+          const requestor = row.cells[0].textContent;
+          const bloodType = row.cells[2].textContent;
+
+          // Provide visual feedback to the user
+          this.textContent = 'Pledged!';
+          this.disabled = true; // Prevents clicking again
+          this.classList.add('pledged'); // Add class for styling
+
+          // Show a confirmation message
+          alert(`Thank you for pledging to donate for ${requestor}!\nYou will receive further details shortly.`);
+
+          // Simulate sending the pledge data to a server
+          console.log(`--- Donation Pledge ---`);
+          console.log(`Pledged for: ${requestor}`);
+          console.log(`Blood Type: ${bloodType}`);
+        });
+      });
+
+      // --- 2. Filter Functionality (Simulation) ---
+      const stateFilter = document.getElementById('filter-state');
+      const districtFilter = document.getElementById('filter-district');
+      const bloodTypeFilter = document.getElementById('filter-blood-type');
+
+      function applyFilters() {
+        const state = stateFilter.value;
+        const district = districtFilter.value;
+        const bloodType = bloodTypeFilter.value;
+
+        // In a real application, this is where you would filter the table
+        // or make a new request to the server to get filtered data.
+        // For this demo, we'll just log the values.
+        
+        console.log("--- Filters Applied ---");
+        console.log("State:", state);
+        console.log("District:", district);
+        console.log("Blood Type:", bloodType);
+        
+        alert("Filter changed! (Check the browser console for selected values)");
+      }
+
+      // Add event listeners to each filter dropdown
+      stateFilter.addEventListener('change', applyFilters);
+      districtFilter.addEventListener('change', applyFilters);
+      bloodTypeFilter.addEventListener('change', applyFilters);
+
+    });
+  </script>
+
+</body>
+</html>
+
